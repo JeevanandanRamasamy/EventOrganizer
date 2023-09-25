@@ -1,26 +1,36 @@
 package eventorganizer;
-import java.util.StringTokenizer;
 
+/**
+ * Represents a contact with department and email
+ * @author Jeeva Ramasamy, Parth Patel
+ */
 public class Contact {
     private Department department;
     private String email;
 
+    /**
+     * Creates a Contact object with the specified department and email
+     * @param department the department of the contact
+     * @param email the email of the contact
+     */
     public Contact(Department department, String email) {
         this.department = department;
         this.email = email;
     }
 
     /**
-     *
-     * @return
+     * Returns the department of this contact
+     * @return department
      */
-    public boolean isValid () {
-//        StringTokenizer st = new StringTokenizer(this.email, "@");
-//        while (st.hasMoreTokens()) {
-//            st.nextToken();
-//            if (!st.nextToken().equals("rutgers.edu"))
-//                return false;
-//        }
+    public Department getDepartment() {
+        return this.department;
+    }
+
+    /**
+     * Checks if the department name and email address are valid
+     * @return true if valid, false otherwise
+     */
+    public boolean isValid() {
         if (!this.email.endsWith("@rutgers.edu"))
             return false;
 
@@ -31,6 +41,10 @@ public class Contact {
         return false;
     }
 
+    /**
+     * Returns a string representation of the contact
+     * @return string version of contact of format department, email
+     */
     @Override
     public String toString() {
         return this.department + ", " + this.email;

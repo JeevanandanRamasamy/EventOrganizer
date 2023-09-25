@@ -1,17 +1,18 @@
 package eventorganizer;
 
 /**
- *
+ * Represents a date with year, month, and day
+ * @author Jeeva Ramasamy, Parth Patel
  */
 public class Date implements Comparable<Date> {
     private int year;
     private int month;
     private int day;
 
-    private static final int FIRSTDAYOFMONTH = 1;
+    private static final int FIRST_DAY_OF_MONTH = 1;
 
     private static final int JANUARY = 1;
-    private static final int FEBRUARY = 2;
+//    private static final int FEBRUARY = 2;
     private static final int MARCH = 3;
     private static final int APRIL = 4;
     private static final int MAY = 5;
@@ -27,6 +28,15 @@ public class Date implements Comparable<Date> {
     private static final int CENTENNIAL = 100;
     private static final int QUARTERCENTENNIAL = 400;
 
+    private static final int FEBRUARY_DAYS = 28;
+    private static final int FEBRUARY_DAYS_LEAP_YEAR = 28;
+
+    /**
+     * Creates a Date object with the specified year, month, and day
+     * @param year the year in the date of format yyyy
+     * @param month the month in the date of format mm
+     * @param day the day in the date of format dd
+     */
     public Date(int year, int month, int day) {
         this.year = year;
         this.month = month;
@@ -34,7 +44,7 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     *
+     * Checks whether the year of the event is a leap year or not
      * @return true if leap year, false otherwise
      */
     private boolean isLeapYear() {
@@ -60,53 +70,69 @@ public class Date implements Comparable<Date> {
         }
 
         // Checks if the day is valid
-        if (this.day < FIRSTDAYOFMONTH) {
+        if (this.day < FIRST_DAY_OF_MONTH) {
             return false;
         }
         else if (this.month == JANUARY || this.month == MARCH || this.month == MAY
-                || this.month == JULY || this.month == AUGUST || this.month == OCTOBER
-                || this.month == DECEMBER) {
+                 || this.month == JULY || this.month == AUGUST || this.month == OCTOBER
+                 || this.month == DECEMBER) {
             return this.day <= 31; // Change 31
         }
         else if (this.month == APRIL || this.month == JUNE || this.month == SEPTEMBER
-                || this.month == NOVEMBER) {
-            return this.day <= 30;
+                 || this.month == NOVEMBER) {
+            return this.day <= 30; // Change 30
         }
         else {
-            if (isLeapYear() && this.day > 29) { // Change 29
+            if (isLeapYear() && this.day > FEBRUARY_DAYS_LEAP_YEAR) {
                 return false;
             }
             else {
-                return this.day <= 28; // Change 28
+                return this.day <= FEBRUARY_DAYS;
             }
         }
     }
 
-    public int compareTo(Date other) {
-        if (this.year > other.year) {
-            return 1;
+    /**
+     * Compares this date with the specified date
+     * @param date the object to be compared.
+     * @return 1 if this date occurs after the specified date,
+     *         -1 if this date occurs before the specified date,
+     *         0 if the dates are the same
+     */
+    @Override
+    public int compareTo(Date date) {
+        if (this.year > date.year) {
+            return 1; // Check if allowed
         }
-        else if (this.year < other.year) {
+        else if (this.year < date.year) {
             return -1;
         }
         else {
-            if (this.month > other.month) {
+            if (this.month > date.month) {
                 return 1;
             }
-            else if (this.month < other.month) {
+            else if (this.month < date.month) {
                 return -1;
             }
             else {
-                return Integer.compare(this.day, other.day);
+                return Integer.compare(this.day, date.day);
             }
         }
     }
 
+    /**
+     * Returns a string representation of the date
+     * @return string version of date in format mm/dd/yyyy
+     */
     @Override
     public String toString() {
         return "" + this.month + '/' + this.day + '/' + this.year;
     }
 
+    /**
+     * Testbed main used as the driver to test public methods
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
         Date d1 = new Date(2023, 9, 23);
         System.out.println(d1);
