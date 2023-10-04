@@ -49,8 +49,4 @@ public class Contact {
     public String toString() {
         return this.department + ", " + this.email;
     }
-
-    public static void main(String[] args) {
-        Contact c1 = new Contact(Department.CS, "email@rutgers.edu");
-    }
 }

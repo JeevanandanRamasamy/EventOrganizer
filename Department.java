@@ -5,11 +5,11 @@ package eventorganizer;
  * @author Jeeva Ramasamy, Parth Patel
  */
 public enum Department {
+    BAIT ("Business Analytics and Information Technology"),
     CS ("Computer Science"),
     EE ("Electrical Engineering"),
     ITI ("Information Technology and Informatics"),
-    MATH ("Mathematics"),
-    BAIT ("Business Analytics and Information Technology");
+    MATH ("Mathematics");
 
     private final String name;
 

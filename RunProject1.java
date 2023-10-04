@@ -13,4 +13,3 @@ public class RunProject1 {
         new EventOrganizer().run();
     }
 }
-
